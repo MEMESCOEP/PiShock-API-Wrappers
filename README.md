@@ -10,9 +10,6 @@ Wrappers are available for the following languages:
 
 Wrappers will be available for the following languages in the future:
 * C#
-* C
-* C++
 * JavaScript
 * Java
-* Visual Basic
 * Go

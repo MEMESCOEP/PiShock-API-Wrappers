@@ -8,7 +8,7 @@ Wrappers are available for the following languages:
 
 <br/>
 
-Wrappers will be available for the following languages in the future:
+Wrappers may be available for the following languages in the future:
 * C#
 * JavaScript (Node.JS)
 * Java

@@ -14,9 +14,18 @@ Wrappers that are in development:
 <br/>
 
 Wrappers may be available for the following languages in the future:
-* JavaScript (Node.JS)
-* Java
-* Go
 * C
 * C++
+* D
+* GO (I don't like the way go deals with libraries, so this may or may not happen)
+* Java
+* JavaScript (Node.JS)
+* NASM Assembly (BIG MAYBE 💀)
+* POSIX Shell
 * Visual Basic
+
+Wrappers that will NOT be available:
+* COBOL (what even is cobol)
+* Objective-C (just no)
+* Rust (fuck rust)
+* Swift (🖕 apple bad 🤢)

@@ -14,8 +14,7 @@ Wrappers that are in development:
 <br/>
 
 Wrappers may be available for the following languages in the future:
-* C
-* C++
+* C/C++
 * D
 * GO (I don't like the way go deals with libraries, so this may or may not happen)
 * Java

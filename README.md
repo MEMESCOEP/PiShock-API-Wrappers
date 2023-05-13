@@ -17,3 +17,6 @@ Wrappers may be available for the following languages in the future:
 * JavaScript (Node.JS)
 * Java
 * Go
+* C
+* C++
+* Visual Basic

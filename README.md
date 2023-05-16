@@ -1,5 +1,5 @@
 # PiShock-API-Wrappers
-A collection of wrappers that make the PiShock API easier to use.
+A collection of wrappers in multiple languages that aim to make the Pishock API easier to use.
 <hr/>
 
 Wrappers are available for the following languages:

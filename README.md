@@ -10,6 +10,7 @@ Wrappers are available for the following languages:
 
 Wrappers that are in development:
 * C#
+* JavaScript (Node.JS)
 
 <br/>
 
@@ -18,7 +19,6 @@ Wrappers may be available for the following languages in the future:
 * D
 * GO (I don't like the way go deals with libraries, so this may or may not happen)
 * Java
-* JavaScript (Node.JS)
 * NASM Assembly (BIG MAYBE 💀)
 * POSIX Shell
 * Visual Basic

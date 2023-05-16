@@ -26,7 +26,6 @@ Wrappers may be available for the following languages in the future:
 <br/>
 
 Wrappers that will NOT be available:
-* COBOL (what even is cobol)
-* Objective-C (just no)
-* Rust (fuck rust)
-* Swift (🖕 apple bad 🤢)
+* Objective-C
+* Rust
+* Swift

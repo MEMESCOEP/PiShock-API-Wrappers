@@ -1,6 +1,6 @@
 ### PiShock API Wrapper ###
 # IMPORTS #
-import requests
+import requests, json
 
 # VARIABLES #
 # Do not change these!
@@ -18,7 +18,7 @@ class PiShockAPI:
         self.APIKey = key
     
     # Send a beep with the specified duration
-    def SendBeep(self, Duration, Debug = False):
+    def SendBeep(self, Duration):
         if Duration < 1 or Duration > 15:
             raise Exception("Invalid duration! The duration must be between 1 and 15.")
 
@@ -33,21 +33,17 @@ class PiShockAPI:
         Response = requests.post(url, headers=headers, json=data)
         Message = Response.content.decode("utf-8")
 
-        if Debug:
-            print("[BEEP] >> JSON data: ", data)
-            print("[BEEP] >> Status code: ", Response.status_code)
-            print("[BEEP] >> Message: ", Message)
-
-        if Response.content.decode("utf-8") != "Operation Succeeded.":
-            raise Exception(Message)
-        
-        elif Response.status_code != 200:
+        if Response.status_code != 200:
             raise Exception("POST failed: ", Response.status_code)
         
+        elif Response.content.decode("utf-8") != "Operation Succeeded.":
+            raise Exception(Message)
+        
+
 
         
     # Send a vibration with the specified intensity and duration
-    def SendVibration(self, Intensity, Duration, Debug = False):
+    def SendVibration(self, Intensity, Duration):
         if Intensity < 1 or Intensity > 100:
             raise Exception("Invalid intensity! The intensity must be between 1 and 100.")
 
@@ -66,21 +62,16 @@ class PiShockAPI:
         Response = requests.post(url, headers=headers, json=data)
         Message = Response.content.decode("utf-8")
 
-        if Debug:
-            print("[VIBR] >> JSON data: ", data)
-            print("[VIBR] >> Status code: ", Response.status_code)
-            print("[VIBR] >> Message: ", Message)
-
-        if Response.content.decode("utf-8") != "Operation Succeeded.":
-            raise Exception(Message)
-        
-        elif Response.status_code != 200:
+        if Response.status_code != 200:
             raise Exception("POST failed: ", Response.status_code)
+        
+        elif Response.content.decode("utf-8") != "Operation Succeeded.":
+            raise Exception(Message)
         
 
 
     # Send a shock with the specified intensity and duration
-    def SendShock(self, Intensity, Duration, Debug = False):
+    def SendShock(self, Intensity, Duration):
         if Intensity < 1 or Intensity > 100:
             raise Exception("Invalid intensity! The intensity must be between 1 and 100.")
 
@@ -99,19 +90,14 @@ class PiShockAPI:
         Response = requests.post(url, headers=headers, json=data)
         Message = Response.content.decode("utf-8")
 
-        if Debug:
-            print("[SHCK] >> JSON data: ", data)
-            print("[SHCK] >> Status code: ", Response.status_code)
-            print("[SHCK] >> Message: ", Message)
-
-        if Response.content.decode("utf-8") != "Operation Succeeded.":
-            raise Exception(Message)
-        
-        elif Response.status_code != 200:
+        if Response.status_code != 200:
             raise Exception("POST failed: ", Response.status_code)
+        
+        elif Response.content.decode("utf-8") != "Operation Succeeded.":
+            raise Exception(Message)
 
     # Retrieve information about the collar
-    def GetCollarInfo(self, Debug = False):
+    def GetCollarInfo(self):
         data = {
             "Username": self.Username,
             "Code": self.ShareCode,
@@ -120,14 +106,23 @@ class PiShockAPI:
         Response = requests.post("https://do.pishock.com/api/GetShockerInfo", headers=headers, json=data)
         Message = Response.content.decode("utf-8")
 
-        if Debug:
-            print("[INFO] >> JSON data: ", data)
-            print("[INFO] >> Status code: ", Response.status_code)
-            print("[INFO] >> Message: ", Message)
-
-        if Response.content.decode("utf-8") != "Operation Succeeded.":
-            raise Exception(Message)
-        
-        elif Response.status_code != 200:
+        if Response.status_code != 200:
             raise Exception("POST failed: ", Response.status_code)
-        
+
+        return Message
+
+    # See if the hub is online
+    def IsHubOnline(self):
+        data = {
+            "Username": self.Username,
+            "Code": self.ShareCode,
+            "Apikey": self.APIKey,
+        }
+        Response = requests.post("https://do.pishock.com/api/GetShockerInfo", headers=headers, json=data)
+        Message = Response.content.decode("utf-8")
+        JSON = json.loads(Message)
+
+        if Response.status_code != 200:
+            raise Exception("POST failed: ", Response.status_code)
+
+        return JSON["online"] != False

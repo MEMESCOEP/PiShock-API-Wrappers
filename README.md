@@ -16,10 +16,8 @@ Wrappers that are in development:
 
 Wrappers may be available for the following languages in the future:
 * C/C++
-* D
 * GO (I don't like the way go deals with libraries, so this may or may not happen)
 * Java
-* NASM Assembly (BIG MAYBE 💀)
 * POSIX Shell
 * Visual Basic
 

@@ -23,7 +23,7 @@ try:
 
     # Send a shock and wait 2 seconds (Intensity is 5, Duration is 1 second)
     print("Sending shock...")
-    api.SendShock(25, 1)
+    api.SendShock(5, 1)
     time.sleep(2)
 
     # Get the collar info in JSON format

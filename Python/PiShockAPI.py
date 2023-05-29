@@ -26,7 +26,7 @@ class PiShockAPI:
             "Username": self.Username,
             "Name": self.ComputerName,
             "Code": self.ShareCode,
-            "Duration": str(Duration), 
+            "Duration": Duration, 
             "Apikey": self.APIKey,
             "Op": "2",
         }
@@ -54,8 +54,8 @@ class PiShockAPI:
             "Username": self.Username,
             "Name": self.ComputerName,
             "Code": self.ShareCode,
-            "Intensity": str(Intensity),
-            "Duration": str(Duration), 
+            "Intensity": Intensity,
+            "Duration": Duration, 
             "Apikey": self.APIKey,
             "Op": "1",
         }
@@ -82,8 +82,31 @@ class PiShockAPI:
             "Username": self.Username,
             "Name": self.ComputerName,
             "Code": self.ShareCode,
-            "Intensity": str(Intensity),
-            "Duration": str(Duration), 
+            "Intensity": Intensity,
+            "Duration": Duration, 
+            "Apikey": self.APIKey,
+            "Op": "0",
+        }
+        Response = requests.post(url, headers=headers, json=data)
+        Message = Response.content.decode("utf-8")
+
+        if Response.status_code != 200:
+            raise Exception("POST failed: ", Response.status_code)
+        
+        elif Response.content.decode("utf-8") != "Operation Succeeded.":
+            raise Exception(Message)
+
+    # Send a mini shock with the specified intensity and duration of 300 milliseconds
+    def SendMiniShock(self, Intensity):
+        if Intensity < 1 or Intensity > 100:
+            raise Exception("Invalid intensity! The intensity must be between 1 and 100.")
+        
+        data = {
+            "Username": self.Username,
+            "Name": self.ComputerName,
+            "Code": self.ShareCode,
+            "Intensity": Intensity,
+            "Duration": 300, 
             "Apikey": self.APIKey,
             "Op": "0",
         }
@@ -126,3 +149,99 @@ class PiShockAPI:
             raise Exception("POST failed: ", Response.status_code)
 
         return JSON["online"] != False
+    
+    # See if the collar is paused
+    def IsCollarPaused(self):
+        data = {
+            "Username": self.Username,
+            "Code": self.ShareCode,
+            "Apikey": self.APIKey,
+        }
+        Response = requests.post("https://do.pishock.com/api/GetShockerInfo", headers=headers, json=data)
+        Message = Response.content.decode("utf-8")
+        JSON = json.loads(Message)
+
+        if Response.status_code != 200:
+            raise Exception("POST failed: ", Response.status_code)
+
+        return JSON["paused"] == False
+    
+    # Get the collar's name
+    def GetCollarName(self):
+        data = {
+            "Username": self.Username,
+            "Code": self.ShareCode,
+            "Apikey": self.APIKey,
+        }
+        Response = requests.post("https://do.pishock.com/api/GetShockerInfo", headers=headers, json=data)
+        Message = Response.content.decode("utf-8")
+        JSON = json.loads(Message)
+
+        if Response.status_code != 200:
+            raise Exception("POST failed: ", Response.status_code)
+
+        return JSON["name"]
+
+    # Get the collar's client ID
+    def GetCollarClientID(self):
+        data = {
+            "Username": self.Username,
+            "Code": self.ShareCode,
+            "Apikey": self.APIKey,
+        }
+        Response = requests.post("https://do.pishock.com/api/GetShockerInfo", headers=headers, json=data)
+        Message = Response.content.decode("utf-8")
+        JSON = json.loads(Message)
+
+        if Response.status_code != 200:
+            raise Exception("POST failed: ", Response.status_code)
+
+        return JSON["clientId"]
+    
+    # Get the collar's ID
+    def GetCollarID(self):
+        data = {
+            "Username": self.Username,
+            "Code": self.ShareCode,
+            "Apikey": self.APIKey,
+        }
+        Response = requests.post("https://do.pishock.com/api/GetShockerInfo", headers=headers, json=data)
+        Message = Response.content.decode("utf-8")
+        JSON = json.loads(Message)
+
+        if Response.status_code != 200:
+            raise Exception("POST failed: ", Response.status_code)
+
+        return JSON["id"]
+    
+    # Get the collar's maximum intensity
+    def GetCollarMaxIntensity(self):
+        data = {
+            "Username": self.Username,
+            "Code": self.ShareCode,
+            "Apikey": self.APIKey,
+        }
+        Response = requests.post("https://do.pishock.com/api/GetShockerInfo", headers=headers, json=data)
+        Message = Response.content.decode("utf-8")
+        JSON = json.loads(Message)
+
+        if Response.status_code != 200:
+            raise Exception("POST failed: ", Response.status_code)
+
+        return JSON["maxIntensity"]
+    
+    # Get the collar's maximum duration
+    def GetCollarMaxDuration(self):
+        data = {
+            "Username": self.Username,
+            "Code": self.ShareCode,
+            "Apikey": self.APIKey,
+        }
+        Response = requests.post("https://do.pishock.com/api/GetShockerInfo", headers=headers, json=data)
+        Message = Response.content.decode("utf-8")
+        JSON = json.loads(Message)
+
+        if Response.status_code != 200:
+            raise Exception("POST failed: ", Response.status_code)
+
+        return JSON["maxDuration"]

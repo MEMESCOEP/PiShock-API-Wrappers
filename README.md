@@ -1,5 +1,7 @@
 # PiShock-API-Wrappers
 A collection of wrappers in multiple languages that aim to make the Pishock API easier to use.
+<br/><br/>
+[NOTE] I will be taking a break from development of these wrappers for at least 3 months. There are some personal reasons, but I'm also focused on other projects right now (a game).
 <hr/>
 
 Wrappers are available for the following languages:
